@@ -1,8 +1,6 @@
 package calculation
 
 import (
-	"errors"
-	"fmt"
 	"strconv"
 	"strings"
 )
@@ -26,8 +24,8 @@ func Solve(num1_str, num2_str, op string) string { // создаем функц�
 }
 
 func Calc(expression string) (float64, error) {
-	error_unknown := errors.New("Error: unknown sign or forgotten comma") // проверяем строку на наличие ненужных символов или незакрытых скобок
-	error_divide := errors.New("Error: divide by 0")
+	error_unknown := ErrInvalidExpression // проверяем строку на наличие ненужных символов или незакрытых скобок
+	error_divide := ErrDivisionByZero
 	expression = strings.ReplaceAll(expression, " ", "")
 	exp_nums := expression
 	exp_signs := expression
@@ -139,9 +137,4 @@ func Calc(expression string) (float64, error) {
 		}
 	}
 	return Calc(expression) // возвращаем значение функции с измененной строкой в ней
-}
-func main() {
-	var a string
-	fmt.Scan(&a)
-	fmt.Println(Calc(a))
 }

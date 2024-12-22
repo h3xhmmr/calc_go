@@ -1,3 +1,3 @@
-module "github.com/github.com/h3xhmmr/calc_go"
+module yandex_project
 
 go 1.23.0
