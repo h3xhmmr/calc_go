@@ -43,3 +43,5 @@
 `curl --location http://localhost:8080/api/v1/calculate --header 'Content-Type: application/json' --data '{"expression": "2+2*2"}'`  
 Код ошибки 422  
 `curl --location http://localhost:8080/api/v1/calculate --header 'Content-Type: application/json' --data '{"expression": "1/0"}'`  
+Также возможен (желательно, т.к. curl немного сломан) запуск через Postman  
+Для этого в строке адреса выберите метод Post и введите адрес `http://localhost:8080/api/v1/calculate`, после чего в поле body введите свой запрос в формате `{"expression": "2+2*2"}`
