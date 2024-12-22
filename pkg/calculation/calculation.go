@@ -24,11 +24,15 @@ func Solve(num1_str, num2_str, op string) string { // создаем функц�
 }
 
 func Calc(expression string) (float64, error) {
-	error_unknown := ErrInvalidExpression // проверяем строку на наличие ненужных символов или незакрытых скобок
-	error_divide := ErrDivisionByZero
+	// проверяем строку на наличие ненужных символов или незакрытых скобок
 	expression = strings.ReplaceAll(expression, " ", "")
 	exp_nums := expression
 	exp_signs := expression
+	for _, x := range expression {
+		if !strings.Contains("1234567890+-/*()", string(x)) {
+			return 0, ErrInvalidExpression
+		}
+	}
 	for _, i := range "+-/*()" {
 		exp_nums = strings.ReplaceAll(exp_nums, string(i), " ") // создаем список всех чисел строки и строчку с операторами
 	}
@@ -39,17 +43,17 @@ func Calc(expression string) (float64, error) {
 	}
 	for j := 0; j < len(expression)-1; j++ {
 		if strings.Contains("+-*/(", string(expression[j])) && strings.Contains("+-*/)", string(expression[j+1])) {
-			return 0, error_unknown
+			return 0, ErrInvalidExpression
 		}
 	}
 	if strings.Count(expression, "(") != strings.Count(expression, ")") {
-		return 0, error_unknown
+		return 0, ErrInvalidExpression
 	}
 	if expression == "" || expression == " " {
-		return 0, error_unknown
+		return 0, ErrInvalidExpression
 	}
 	if strings.Contains("*(/+-", string(expression[len(expression)-1])) {
-		return 0, error_unknown
+		return 0, ErrInvalidExpression
 	}
 	if strings.Count(expression, "(") == 0 { // если в строке нет скобок, просто считаем каждый элемент строки(первое число + знак операции + второе число) и переписываем его на результат этой операции, делаем это пока не закончатся нужные символы
 		for strings.Count(expression, "*") != 0 {
@@ -73,7 +77,7 @@ func Calc(expression string) (float64, error) {
 			num1_str := exp_nums_slice[strings.Index(exp_signs, "/")]
 			num2_str := exp_nums_slice[strings.Index(exp_signs, "/")+1]
 			if num2_str == "0" { // если есть деление на ноль - выводим ошибку
-				return 0, error_divide
+				return 0, ErrDivisionByZero
 			}
 			str_in_comma = num1_str + "/" + num2_str
 			expression = strings.ReplaceAll(expression, str_in_comma, Solve(num1_str, num2_str, "/"))
