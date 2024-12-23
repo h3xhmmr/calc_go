@@ -35,9 +35,9 @@
 
 ## Запуск проекта
 
-Для начала установите Go на свой компьютер [install golang](https://go.dev/doc/install)  
+Для начала установите Go на свой компьютер [install golang](https://go.dev/doc/install), VisualStudio[install VS](https://code.visualstudio.com/)
 
-Далее необходимо клонировать репозиторий `git clone https://github.com/h3xhmmr/calc_go`, а затем запустить сервер (по умолчанию работает на порте :8080) `go run calc_go/cmd/main.go`
+Далее, зайдя в VStudio необходимо клонировать репозиторий `git clone https://github.com/h3xhmmr/calc_go`, а затем запустить сервер (по умолчанию работает на порте :8080) `go run calc_go/cmd/main.go`
 
 
 ## Примеры использования
