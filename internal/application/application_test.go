@@ -29,28 +29,28 @@ func TestCalcHandler(t *testing.T) {
 			method:     "POST",
 			body:       map[string]string{"expression": "3+(5*2"},
 			statusCode: http.StatusUnprocessableEntity,
-			response:   map[string]interface{}{"error": "Expression is not valid. Number of brackets doesn't match"},
+			response:   map[string]interface{}{"error": "invalid expression"},
 		},
 		{
 			name:       "values",
 			method:     "POST",
 			body:       map[string]string{"expression": "3+"},
 			statusCode: http.StatusUnprocessableEntity,
-			response:   map[string]interface{}{"error": "Expression is not valid. Not enough values"},
+			response:   map[string]interface{}{"error": "invalid expression"},
 		},
 		{
 			name:       "division by zero",
 			method:     "POST",
 			body:       map[string]string{"expression": "3/0"},
 			statusCode: http.StatusUnprocessableEntity,
-			response:   map[string]interface{}{"error": "Expression is not valid. Division by zero"},
+			response:   map[string]interface{}{"error": "division by zero"},
 		},
 		{
 			name:       "letters",
 			method:     "POST",
 			body:       map[string]string{"expression": "3+abc"},
 			statusCode: http.StatusUnprocessableEntity,
-			response:   map[string]interface{}{"error": "Expression is not valid. Only numbers and ( ) + - * / allowed"},
+			response:   map[string]interface{}{"error": "invalid expression"},
 		},
 	}
 
